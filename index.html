@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery UI Pinpad Demo</title>
+    <link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/jquery.ui.pinpad.css">
+    <style>
+        body{
+            font-family: "Trebuchet MS", sans-serif;
+            margin: 50px;
+        }
+        .demoHeaders {
+            margin-top: 2em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Welcome to jQuery UI Pinpad Demo page!</h1>
+
+<div class="ui-widget">
+    <p>This page demonstrates the basic pinpad widget usage.</p>
+</div>
+
+
+<!-- Default -->
+<h2 class="demoHeaders">Default functionality</h2>
+<div>
+    <input id="pinpadOverlay" type="text" title="Click here">
+</div>
+
+
+
+<!-- Display inline -->
+<h2 class="demoHeaders">Display inline</h2>
+<div>
+    <input id="pinpadInline" type="password" title="Use the pinpad">
+    <div id="pinpadContainer"></div>
+</div>
+
+<script src="external/jquery.js"></script>
+<script src="external/jquery-ui.js"></script>
+<script src="dist/js/jquery.ui.pinpad.js"></script>
+<script>
+
+    $("#pinpadOverlay").pinpad({
+        display: {
+            decPoint: ".",
+            cancel: "Cancel",
+            correct: "Correct",
+            confirm: "Confirm",
+            help: "Help"
+        },
+        commands: [
+            {position: 0, name: "cancel", options: {icon: "ui-icon-close", iconPosition: "end"}},
+            {position: 1, name: "correct", options: {icon: "ui-icon-caret-1-w", iconPosition: "end"}},
+            {position: 2, name: "confirm", options: {icon: "ui-icon-check", iconPosition: "end"}},
+            {position: 3, name: "help", options: {icon: "ui-icon-help", iconPosition: "end"}}
+        ],
+        show: "puff",
+        hide: "puff",
+        keypress: function(event, keyCode) {
+            return !(keyCode === $.ui.keyCode.NUM_PAD_0 && this.value === "0");
+        },
+        change: function(event) {
+            var pinpad = $(this);
+            var value = this.value;
+            if (/^0\d+/.test(value)) {
+                pinpad.val(value.substring(1));
+            }
+        },
+        confirm: function(event) {
+            console.log("confirm", event);
+        },
+        help: function(event) {
+            console.log("help", event);
+        }
+    });
+
+
+    $("#pinpadInline").pinpad({
+        autoComplete: true,
+        digitOnly: true,
+        clear: false,
+        minLength: 5,
+        maxLength: 5,
+        display: {
+            cancel: "Cancel",
+            correct: "Correct",
+            confirm: "Confirm",
+            reset: "Reset"
+        },
+        keys: $.ui.pinpad.generateRandomKeys(),
+        commands: [
+            {position: 0, name: "cancel", options: {icon: "ui-icon-close", iconPosition: "end"}},
+            {position: 1, name: "correct", options: {icon: "ui-icon-caret-1-w", iconPosition: "end"}},
+            {position: 2, name: "confirm", options: {icon: "ui-icon-check", iconPosition: "end"}},
+            {position: 3, name: "reset", options: {icon: "ui-icon-refresh", iconPosition: "end"}}
+        ],
+        appendTo: "#pinpadContainer",
+        cancel: function() {
+            $(this).pinpad("clear");
+        },
+        confirm: function(event) {
+            console.log("confirm", event);
+        },
+        reset: function() {
+            var pinpad = $(this);
+            pinpad.pinpad("clear");
+            pinpad.pinpad("option", "keys", $.ui.pinpad.generateRandomKeys());
+            pinpad.pinpad("refresh");
+        }
+    });
+
+</script>
+</body>
+</html>

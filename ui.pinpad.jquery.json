@@ -1,0 +1,28 @@
+{
+  "name": "ui.pinpad",
+  "version": "0.0.1",
+  "title": "jQuery UI Pinpad",
+  "author": {
+    "name": "Yannick Ebongue",
+    "email": "yannickebongue@yahoo.fr"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.12.4",
+    "jquery-ui": ">=1.12.1"
+  },
+  "description": "An interactive Pinpad widget for point of sale (POS) or encrypted pinpad (EPP) simulation",
+  "keywords": [
+    "jquery",
+    "ui",
+    "pinpad",
+    "widget"
+  ],
+  "bugs": "https://github.com/yannickebongue/jquery-ui-pinpad/issues",
+  "homepage": "https://github.com/yannickebongue/jquery-ui-pinpad"
+}

@@ -1,0 +1,36 @@
+{
+  "name": "jquery.ui.pinpad",
+  "title": "jQuery UI Pinpad",
+  "description": "An interactive Pinpad widget for point of sale (POS) or encrypted pinpad (EPP) simulation",
+  "version": "0.0.1",
+  "keywords": [
+    "jquery",
+    "ui",
+    "pinpad",
+    "widget"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Yannick Ebongue",
+    "email": "yannickebongue@yahoo.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yannickebongue/jquery-ui-pinpad.git"
+  },
+  "homepage": "https://github.com/yannickebongue/jquery-ui-pinpad",
+  "bugs": "https://github.com/yannickebongue/jquery-ui-pinpad/issues",
+  "dependencies": {
+    "jquery": ">=1.12.4",
+    "jquery-ui": ">=1.12.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-clean": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-jquerymanifest": "^0.1.4"
+  }
+}
