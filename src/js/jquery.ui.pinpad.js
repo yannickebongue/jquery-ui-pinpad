@@ -90,7 +90,7 @@
                 {position: 2, name: "confirm", options: {icon: "ui-icon-radio-off", iconPosition: "end"}}
             ],
 
-            /*
+            /**
              * Specify the container of the pin pad widget. Must be a valid HTML element or jQuery selector. If no matching
              * DOM element is found during rendering, the widget is inserted directly after the pin pad input.
              */
