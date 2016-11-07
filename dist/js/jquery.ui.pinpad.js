@@ -29,7 +29,7 @@
 
     $.widget("ui.pinpad", {
 
-        version: "0.0.1",
+        version: "1.0.0-SNAPSHOT",
         defaultElement: "<input>",
 
         options: {
@@ -90,7 +90,7 @@
                 {position: 2, name: "confirm", options: {icon: "ui-icon-radio-off", iconPosition: "end"}}
             ],
 
-            /*
+            /**
              * Specify the container of the pin pad widget. Must be a valid HTML element or jQuery selector. If no matching
              * DOM element is found during rendering, the widget is inserted directly after the pin pad input.
              */
@@ -142,12 +142,7 @@
                 .data("input", inst.element);
 
             inst._bindInputEvents();
-            //inst._drawKeys();
-            //inst._drawCommands();
             inst.refresh();
-
-            //inst._focusable(inst.outputElement);
-            //inst._hoverable(inst.outputElement);
 
             if (!container.length) {
                 delete inst.options.appendTo;
@@ -173,17 +168,6 @@
                             }
                         } else {
                             inst.cancel();
-                        }
-                    }
-                });
-                inst.ppDiv.on({
-                    focusout: function(event) {
-                        if (!$(event.target).is(".ui-pinpad-command")) {
-                            var relatedTarget = $(event.relatedTarget);
-                            var input = relatedTarget.closest(".ui-pinpad").data("input");
-                            if (!((input && input.attr("id") === inst.element.attr("id")) || (relatedTarget.attr("id") === inst.outputElement.attr("id")))) {
-                                inst.cancel();
-                            }
                         }
                     }
                 });
@@ -344,6 +328,7 @@
                 click: function(event) {
                     var keyCode = button.data("keyCode");
                     var value = this.element.val();
+                    this.outputElement.focus();
                     if (($.ui.pinpad.isDigit(keyCode) || ($.ui.pinpad.isDecimalPoint(keyCode) && value.indexOf(".") == -1)) &&
                             value.length < this.options.maxLength &&
                             this._trigger("keypress", event, keyCode)) {
@@ -357,7 +342,7 @@
             this._on(button, {
                 click: function(event) {
                     if (button.is(".ui-pinpad-command-correct")) {
-                        //event.stopImmediatePropagation();
+                        this.outputElement.focus();
                         if (this.options.clear) {
                             this.clear();
                         } else {
