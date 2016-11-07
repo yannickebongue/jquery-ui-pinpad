@@ -39,6 +39,10 @@
     <div id="pinpadContainer"></div>
 </div>
 
+<div id="dialogMessage" title="Help">
+    <p>Click on the numeric keys on the screen and press the Confirm button.</p>
+</div>
+
 <script src="external/jquery.js"></script>
 <script src="external/jquery-ui.js"></script>
 <script src="dist/js/jquery.ui.pinpad.js"></script>
@@ -74,7 +78,7 @@
             console.log("confirm", event);
         },
         help: function(event) {
-            console.log("help", event);
+            $("#dialogMessage").dialog("open");
         }
     });
 
@@ -110,6 +114,16 @@
             pinpad.pinpad("clear");
             pinpad.pinpad("option", "keys", $.ui.pinpad.generateRandomKeys());
             pinpad.pinpad("refresh");
+        }
+    });
+
+    $("#dialogMessage").dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Ok: function () {
+                $(this).dialog("close");
+            }
         }
     });
 
