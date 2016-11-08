@@ -38,25 +38,15 @@ module.exports = function (grunt) {
             },
             build: {
                 files: {
-                    "dist/js/<%= pkg.name %>.min.js": "dist/js/<%= pkg.name %>.js"
+                    "dist/js/jquery.ui.pinpad.min.js": "dist/js/jquery.ui.pinpad.js"
                 }
             }
         },
 
         cssmin: {
             build: {
-                src: "dist/css/*.css",
-                dest: "dist/css/<%= pkg.name %>.min.css"
-            }
-        },
-
-        jquerymanifest: {
-            options: {
-                source: pkg,
-                overrides: {
-                    name: "ui.pinpad",
-                    title: pkg.title
-                }
+                src: "dist/css/jquery.ui.pinpad.css",
+                dest: "dist/css/jquery.ui.pinpad.min.css"
             }
         }
 
@@ -66,8 +56,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
-    grunt.loadNpmTasks("grunt-jquerymanifest");
 
-    grunt.registerTask("default", ["clean", "copy", "uglify", "cssmin", "jquerymanifest"]);
+    grunt.registerTask("default", ["clean", "copy", "uglify", "cssmin"]);
 
 };
