@@ -29,7 +29,7 @@
 
     $.widget("ui.pinpad", {
 
-        version: "1.0.1-SNAPSHOT",
+        version: "1.0.1",
         defaultElement: "<input>",
 
         options: {
