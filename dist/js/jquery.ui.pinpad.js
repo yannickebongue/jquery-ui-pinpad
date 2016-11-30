@@ -38,7 +38,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.1.0-SNAPSHOT",
+        version: "1.1.0",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
