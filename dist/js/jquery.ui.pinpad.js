@@ -38,7 +38,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.1.0-SNAPSHOT",
+        version: "1.1.0",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -234,6 +234,7 @@
                 } );
                 inst._addClass( inst.ppDiv, null, "ui-front" );
                 inst._hide( inst.ppDiv, false );
+                inst.ppDiv.detach();
             } else {
                 inst._addClass( inst.ppDiv, "ui-pinpad-inline" );
             }
@@ -578,6 +579,7 @@
 
         _open: function( event ) {
             var inst = this;
+            inst.ppDiv.appendTo( document.body );
             inst._adjustPosition();
             inst._show( inst.ppDiv, inst.options.show, function() {
                 inst._trigger( "open", event );
@@ -588,6 +590,7 @@
             var inst = this;
             inst._hide( inst.ppDiv, inst.options.hide, function() {
                 inst._trigger( "close", event );
+                inst.ppDiv.detach();
             } );
         },
 
