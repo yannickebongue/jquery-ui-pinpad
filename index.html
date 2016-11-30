@@ -140,7 +140,7 @@
 <script>
     var version = $.ui.pinpad.version;
 
-    $( "#downloadFrame" ).find( "button" ).button( { icon: "ui-icon-arrowthickstop-1-s" } ).click( function () {
+    $( "#downloadFrame" ).find( "button" ).button( { icon: "ui-icon-arrowthickstop-1-s", label: "Download jQuery UI Pinpad " + version } ).click( function () {
         location.href = "https://github.com/yannickebongue/jquery-ui-pinpad/archive/" + version + ".zip";
     } );
 
