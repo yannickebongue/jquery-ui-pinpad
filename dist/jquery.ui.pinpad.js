@@ -38,7 +38,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.2.0-SNAPSHOT",
+        version: "1.2.0",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -577,6 +577,11 @@
             this.element.removeAttr( "role" ).removeUniqueId();
         },
 
+        /**
+         * Show the pinpad overlay.
+         * @param event the original event which cause the pinpad to be opened.
+         * @private
+         */
         _open: function( event ) {
             var inst = this;
             inst.ppDiv.appendTo( document.body );
@@ -586,6 +591,11 @@
             } );
         },
 
+        /**
+         * Hide the pinpad overlay.
+         * @param event the original event which cause the pinpad to be closed.
+         * @private
+         */
         _close: function( event ) {
             var inst = this;
             inst._hide( inst.ppDiv, inst.options.hide, function() {
