@@ -1,31 +1,28 @@
-/**
- * Created by yannick.ebongue on 20/10/2016.
- */
-
-module.exports = function (grunt) {
+module.exports = function( grunt ) {
 
     "use strict";
 
-    var pkg = grunt.file.readJSON("package.json");
+    var pkg = grunt.file.readJSON( "package.json" );
 
-    grunt.initConfig({
+    grunt.initConfig( {
 
         pkg: pkg,
 
-        clean: ["dist/"],
+        clean: [ "dist/" ],
 
         copy: {
             build: {
                 options: {
-                    process: function (content, srcpath) {
-                        return content.replace(/@VERSION/g, pkg.version);
+                    process: function( content ) {
+                        return content.replace( /@VERSION/g, pkg.version );
                     }
                 },
                 files: [
                     {
                         expand: true,
+                        flatten: true,
                         cwd: "src/",
-                        src: ["**"],
+                        src: [ "**" ],
                         dest: "dist/"
                     }
                 ]
@@ -38,25 +35,25 @@ module.exports = function (grunt) {
             },
             build: {
                 files: {
-                    "dist/js/jquery.ui.pinpad.min.js": "dist/js/jquery.ui.pinpad.js"
+                    "dist/jquery.ui.pinpad.min.js": "dist/jquery.ui.pinpad.js"
                 }
             }
         },
 
         cssmin: {
             build: {
-                src: "dist/css/jquery.ui.pinpad.css",
-                dest: "dist/css/jquery.ui.pinpad.min.css"
+                src: "dist/jquery.ui.pinpad.css",
+                dest: "dist/jquery.ui.pinpad.min.css"
             }
         }
 
     });
 
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-contrib-copy");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-contrib-cssmin");
+    grunt.loadNpmTasks( "grunt-contrib-clean" );
+    grunt.loadNpmTasks( "grunt-contrib-copy" );
+    grunt.loadNpmTasks( "grunt-contrib-uglify" );
+    grunt.loadNpmTasks( "grunt-contrib-cssmin" );
 
-    grunt.registerTask("default", ["clean", "copy", "uglify", "cssmin"]);
+    grunt.registerTask( "default", [ "clean", "copy", "uglify", "cssmin" ] );
 
 };

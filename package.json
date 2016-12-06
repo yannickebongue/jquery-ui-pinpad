@@ -2,8 +2,8 @@
   "name": "jquery-ui-pinpad",
   "title": "jQuery UI Pinpad",
   "description": "An interactive Pinpad widget for point of sale (POS) or encrypted pinpad (EPP) simulation",
-  "version": "1.1.1-SNAPSHOT",
-  "main": "dist/js/jquery.ui.pinpad.js",
+  "version": "1.2.0-SNAPSHOT",
+  "main": "dist/jquery.ui.pinpad.js",
   "keywords": [
     "jquery",
     "jquery-plugin",
