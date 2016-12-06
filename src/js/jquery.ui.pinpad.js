@@ -577,6 +577,11 @@
             this.element.removeAttr( "role" ).removeUniqueId();
         },
 
+        /**
+         * Show the pinpad overlay.
+         * @param event the original event which cause the pinpad to be opened.
+         * @private
+         */
         _open: function( event ) {
             var inst = this;
             inst.ppDiv.appendTo( document.body );
@@ -586,6 +591,11 @@
             } );
         },
 
+        /**
+         * Hide the pinpad overlay.
+         * @param event the original event which cause the pinpad to be closed.
+         * @private
+         */
         _close: function( event ) {
             var inst = this;
             inst._hide( inst.ppDiv, inst.options.hide, function() {
@@ -662,14 +672,14 @@
 
         /**
          * Get or set the raw value of this pinpad.
-         * @param newValue the new raw value to set if not undefined.
-         * @returns {string} the current raw value of this pinpad if newValue is undefined.
+         * @param value the new raw value to set if not undefined.
+         * @returns {string} the current raw value of this pinpad if value is undefined.
          */
-        value: function( newValue ) {
-            if ( newValue === undefined ) {
+        value: function( value ) {
+            if ( value === undefined ) {
                 return this._getValue();
             }
-            var val = newValue.toString();
+            var val = value.toString();
             this._setValue( val.substring( 0, Math.min( val.length, this.options.maxLength ) ) );
         },
 
@@ -695,7 +705,7 @@
 
         /**
          * Generates a pin pad keys layout in order to have keys set in random position.
-         * @returns {Array} the pin pad keys' layout.
+         * @returns {Array} the pinpad keys' layout.
          */
         generateRandomKeys: function() {
             var keys = [];
@@ -730,9 +740,9 @@
         },
 
         /**
-         * Checks if the given key code represents the decimal point of the num pad.
+         * Checks if the given key code represents the decimal point of the numpad.
          * @param keyCode the key code to check.
-         * @returns {boolean} true if the key code represents the decimal point of the num pad,
+         * @returns {boolean} true if the key code represents the decimal point of the numpad,
          * otherwise false.
          */
         isDecimalPoint: function( keyCode ) {
@@ -740,9 +750,9 @@
         },
 
         /**
-         * Checks if the given key code represents a digit of the num pad.
+         * Checks if the given key code represents a digit of the numpad.
          * @param keyCode the key code to check
-         * @returns {boolean} true if the key code represents a digit of the num pad, otherwise
+         * @returns {boolean} true if the key code represents a digit of the numpad, otherwise
          * false.
          */
         isDigit: function( keyCode ) {
