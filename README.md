@@ -31,7 +31,7 @@ Insert an input text where to apply the PIN pad feature
 
 Create the pinpad widget for the input text
 
-    $(".input-text").pinpad();
+    $( ".input-text" ).pinpad();
 
 This will generate an interactive pinpad which will be initially hidden. The user just have to focus the input (click inside or use the tab key) to open the interactive pinpad in small overlay.
 
@@ -49,9 +49,9 @@ Insert the div that will contain the interactive pinpad
 
 Create the pinpad widget for the input text
 
-    $(".input-text").pinpad({
+    $( ".input-text" ).pinpad( {
         appendTo: ".pinpad-container"
-    });
+    } );
 
 This will generate an interactive pinpad inside element specified by the `appendTo` option to use during the pinpad widget initialization.
 
