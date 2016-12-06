@@ -21,6 +21,7 @@ module.exports = function( grunt ) {
                     {
                         expand: true,
                         flatten: true,
+                        filter: "isFile",
                         cwd: "src/",
                         src: [ "**" ],
                         dest: "dist/"
