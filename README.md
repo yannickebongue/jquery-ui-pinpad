@@ -6,15 +6,18 @@ The jQuery UI Pinpad is a jQuery UI widget to simulate on a web browser screen a
 
 Include the following Javascript and CSS:
 
+    <!-- jQuery UI theme -->
+    <link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
+
     <!-- pinpad CSS -->
-    <link rel="stylesheet" type="text/css" href="dist/css/jquery.ui.pinpad.css">
+    <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
 
     <!-- external libraries -->
     <script src="external/jquery.js"></script>
     <script src="external/jquery-ui.js"></script>
 
     <!-- pinpad widget -->
-    <script src="dist/js/jquery.ui.pinpad.js"></script>
+    <script src="dist/jquery.ui.pinpad.js"></script>
 
 ## Usage
 
