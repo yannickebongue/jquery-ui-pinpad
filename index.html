@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>jQuery UI Pinpad</title>
+    <title>jQuery UI Pinpad Widget</title>
     <link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="dist/css/jquery.ui.pinpad.css">
+    <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
     <style>
         body{
             font-family: "Trebuchet MS", sans-serif;
@@ -44,73 +44,77 @@
     <!-- Default -->
     <h2 class="demoHeaders">Default functionality</h2>
     <div>
-        <input id="default" type="text" title="Click here">
-
         <div class="demo-description">
             <p>The pinpad is tied to a standard form input field. Focus on the input (click, or use the tab key) to open an interactive pin pad in a small overlay.</p>
         </div>
+
+        <input id="default" type="text" title="Click here">
     </div>
 
 
     <!-- Autocompletion -->
     <h2 class="demoHeaders">Autocompletion</h2>
     <div>
-        <input id="autocompletion" type="text" title="Click here" maxlength="5">
-
         <div class="demo-description">
             <p>Confirm the content of the pinpad input automatically when its value reach the maximum length. Set the <code>autoComplete</code> option to <code>true</code> and set one of <code>maxlength</code> attribute of the pinpad input or <code>maxLength</code> option during pinpad creation.</p>
         </div>
+
+        <input id="autocompletion" type="text" title="Click here" maxlength="5">
     </div>
 
 
     <!-- Content length restriction -->
     <h2 class="demoHeaders">Restrict content length</h2>
     <div>
-        <input id="contentLengthRestriction" type="text" title="Click here to insert your PIN">
-
         <div class="demo-description">
             <p>Restrict the length of the pinpad input content using the <code>minLength</code> and <code>maxLength</code> options.</p>
         </div>
+
+        <input id="contentLengthRestriction" type="text" title="Click here to insert your PIN">
     </div>
 
 
     <!-- Custom command -->
     <h2 class="demoHeaders">Custom command</h2>
     <div>
-        <input id="customCommand" type="text" title="Click here">
-
         <div class="demo-description">
             <p>Adding a custom command to the pinpad. By default the pinpad widget contains 3 commands: the cancel, the correct and the confirm command.</p>
         </div>
+
+        <input id="customCommand" type="text" title="Click here">
     </div>
 
 
     <!-- Digit only -->
     <h2 class="demoHeaders">Digit only</h2>
     <div>
-        <input id="digitOnly" type="text" title="Click here">
-
         <div class="demo-description">
             <p>Use the <code>digitOnly</code> option to accept or not the decimal point.</p>
         </div>
+
+        <input id="digitOnly" type="text" title="Click here">
     </div>
 
 
     <!-- Display inline -->
     <h2 class="demoHeaders">Display inline</h2>
     <div>
-        <input id="inline" type="password" title="Use the pinpad">
-        <div id="container"></div>
-
         <div class="demo-description">
             <p>Display the pinpad embedded in the page instead of in an overlay. Set the <code>appendTo</code> option during the pinpad creation to indicate where to generate the widget.</p>
         </div>
+
+        <input id="inline" type="password" title="Use the pinpad">
+        <div id="container"></div>
     </div>
 
 
     <!-- Localization -->
     <h2 class="demoHeaders">Localize pinpad</h2>
     <div>
+        <div class="demo-description">
+            <p>Localize the pinpad language (Default: english).</p>
+        </div>
+
         <input id="localization" type="text" title="Click here">
         <select id="locale">
             <option value="en">English</option>
@@ -118,10 +122,6 @@
             <option value="fr" selected>Français</option>
             <option value="it">Italiano</option>
         </select>
-
-        <div class="demo-description">
-            <p>Localize the pinpad language (Default: english).</p>
-        </div>
     </div>
 
 
@@ -133,10 +133,10 @@
 
 <script src="external/jquery.js"></script>
 <script src="external/jquery-ui.js"></script>
-<script src="dist/js/jquery.ui.pinpad.js"></script>
-<script src="i18n/pinpad-es.js"></script>
-<script src="i18n/pinpad-fr.js"></script>
-<script src="i18n/pinpad-it.js"></script>
+<script src="dist/jquery.ui.pinpad.js"></script>
+<script src="i18n/jquery.ui.pinpad-es.js"></script>
+<script src="i18n/jquery.ui.pinpad-fr.js"></script>
+<script src="i18n/jquery.ui.pinpad-it.js"></script>
 <script>
     var version = $.ui.pinpad.version;
 
