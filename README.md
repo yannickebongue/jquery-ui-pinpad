@@ -6,18 +6,20 @@ The jQuery UI Pinpad is a jQuery UI widget to simulate on a web browser screen a
 
 Include the following Javascript and CSS:
 
-    <!-- jQuery UI theme -->
-    <link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
+```html
+<!-- jQuery UI theme -->
+<link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
 
-    <!-- pinpad CSS -->
-    <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
+<!-- pinpad CSS -->
+<link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
 
-    <!-- external libraries -->
-    <script src="external/jquery.js"></script>
-    <script src="external/jquery-ui.js"></script>
+<!-- external libraries -->
+<script src="external/jquery.js"></script>
+<script src="external/jquery-ui.js"></script>
 
-    <!-- pinpad widget -->
-    <script src="dist/jquery.ui.pinpad.js"></script>
+<!-- pinpad widget -->
+<script src="dist/jquery.ui.pinpad.js"></script>
+```
 
 ## Usage
 
@@ -27,11 +29,15 @@ The jQuery UI Pinpad is tied to a standard form input field.
 
 Insert an input text where to apply the PIN pad feature
 
-    <input class="input-text" type="text">
+```html
+<input id="pinpad" type="text">
+```
 
 Create the pinpad widget for the input text
 
-    $( ".input-text" ).pinpad();
+```javascript
+$( "#pinpad" ).pinpad();
+```
 
 This will generate an interactive pinpad which will be initially hidden. The user just have to focus the input (click inside or use the tab key) to open the interactive pinpad in small overlay.
 
@@ -41,17 +47,23 @@ The jQuery UI Pinpad can also be displayed embedded in the page instead of an ov
 
 Insert an input text where to apply the PIN pad feature
 
-    <input class="input-text" type="text">
+```html
+<input id="pinpad" type="text">
+```
 
 Insert the div that will contain the interactive pinpad
 
-    <div class="pinpad-container"></div>
+```html
+<div id="container"></div>
+```
 
 Create the pinpad widget for the input text
 
-    $( ".input-text" ).pinpad( {
-        appendTo: ".pinpad-container"
-    } );
+```javascript
+$( "#pinpad" ).pinpad( {
+    appendTo: "#container"
+} );
+```
 
 This will generate an interactive pinpad inside element specified by the `appendTo` option to use during the pinpad widget initialization.
 
