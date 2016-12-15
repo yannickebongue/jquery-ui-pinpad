@@ -4,12 +4,7 @@
         // AMD. Register as an anonymous module.
         define( [
             "jquery",
-            "./button",
-            "../keycode",
-            "../position",
-            "../unique-id",
-            "../version",
-            "../widget"
+            "jquery-ui"
         ], factory );
     } else {
 
@@ -20,7 +15,6 @@
     "use strict";
 
     $.extend( $.ui.keyCode, {
-        DECIMAL_POINT: 110,
         NUMPAD_0: 96,
         NUMPAD_1: 97,
         NUMPAD_2: 98,
@@ -30,7 +24,8 @@
         NUMPAD_6: 102,
         NUMPAD_7: 103,
         NUMPAD_8: 104,
-        NUMPAD_9: 105
+        NUMPAD_9: 105,
+        DECIMAL_POINT: 110
     } );
 
     $.widget( "ui.pinpad", {
@@ -38,7 +33,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.2.0",
+        version: "1.2.1-SNAPSHOT",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -206,7 +201,7 @@
 
             if ( !container.length ) {
                 delete inst.options.appendTo;
-                inst._on( {
+                inst._on( document.body, {
                     "pinpadcancel": function( event ) {
                         inst._close( event.originalEvent );
                     },
@@ -214,7 +209,7 @@
                         inst._close( event.originalEvent );
                     }
                 } );
-                inst.outputElement.on( {
+                inst._on( inst.outputElement, {
                     focusin: function( event ) {
                         if ( inst.ppDiv.is( ":hidden" ) ) {
                             inst._open( event );
@@ -227,9 +222,10 @@
                             if ( !( input && input.attr( "id" ) === inst.element.attr( "id" ) ) ) {
                                 inst.cancel();
                             }
-                        } else {
-                            inst.cancel();
                         }
+                    },
+                    change: function() {
+                        inst._displayValue();
                     }
                 } );
                 inst._addClass( inst.ppDiv, null, "ui-front" );
@@ -257,6 +253,13 @@
             div.remove();
         },
 
+        /**
+         * Returns the jQuery object which contains the HTML element that will contains the pinpad.
+         * If the jQuery object length is 0, then the pinpad widget will be appended to the
+         * document body element.
+         * @returns {jQuery} the pinpad container wrapper.
+         * @private
+         */
         _appendTo: function() {
             var container = $();
             if ( this.options.appendTo ) {
@@ -266,12 +269,21 @@
         },
 
         /**
+         * Checks if the decimal point key should be enabled.
+         * @private
+         */
+        _checkDecimalKey: function() {
+            var value = this.element.val();
+            this.ppDiv.find( ".ui-pinpad-key-num-pad-dec" )
+                .button( "option", "disabled", this.options.digitOnly || /\./.test( value ) );
+        },
+
+        /**
          * Checks and adjusts the state of the confirm command button.
          * @private
          */
         _checkConfirmCommand: function() {
             var value = this.element.val();
-            this.output().val( this.options.formatter.format( value, this.options ) );
             if ( this.element.is( ":enabled" ) ) {
                 var confirmCommand = this.ppDiv.find( ".ui-pinpad-command-confirm" );
                 var confirmDisabled = confirmCommand.button( "option", "disabled" );
@@ -297,7 +309,7 @@
          * @private
          */
         _drawKeys: function() {
-            var that = this;
+            var inst = this;
             var keys = [];
             var numPad = $( "<div class='ui-pinpad-num-pad'></div>" ).appendTo( this.ppDiv );
             var table = $( "<table></table>" ).appendTo( numPad );
@@ -326,7 +338,7 @@
                                     "class='ui-pinpad-key ui-pinpad-key-num-pad-dec' " +
                                     "data-key-code='" + $.ui.keyCode.DECIMAL_POINT +
                                     "' value='.'>" + this.options.display.decPoint + "</button>" )
-                                    .appendTo( col ).button();
+                                    .appendTo( col ).button( { disabled: this.options.digitOnly } );
                             } else if ( keyId === "empty" ) {
                                 $( "<button type='button' " +
                                     "class='ui-pinpad-key ui-pinpad-key-num-pad-empty' " +
@@ -339,7 +351,8 @@
             }
             this.ppDiv.find( ".ui-pinpad-key" ).each( function( index, element ) {
                 var button = $( element );
-                that._bindKeyEvents( button );
+                button.attr( "tabindex", "0" );
+                inst._bindKeyEvents( button );
             } );
         },
 
@@ -366,6 +379,7 @@
                 button = commandPanel.find( "tr:eq(" + command.position + ") .ui-pinpad-command" )
                     .addClass( "ui-pinpad-command-" + command.name )
                     .attr( "name", command.name )
+                    .attr( "tabindex", "0" )
                     .button( "option", $.extend( {}, command.options, {
                         label: that.options.display[ command.name ]
                     } ) );
@@ -397,6 +411,8 @@
             this._on( this.element, {
                 change: function( event ) {
                     this._trigger( "change", event );
+                    this._displayValue();
+                    this._checkDecimalKey();
                     this._checkConfirmCommand();
                     event.preventDefault();
                 }
@@ -444,12 +460,16 @@
             } );
         },
 
+        /**
+         * Bind events on pinpad key button element.
+         * @param button
+         * @private
+         */
         _bindKeyEvents: function( button ) {
             this._on( button, {
                 click: function( event ) {
                     var keyCode = button.data( "keyCode" );
                     var value = this.element.val();
-                    this.outputElement.focus();
                     if ( ( $.ui.pinpad.isDigit( keyCode ) ||
                         ( $.ui.pinpad.isDecimalPoint( keyCode ) &&
                         value.indexOf( "." ) === -1 ) ) &&
@@ -461,11 +481,15 @@
             } );
         },
 
+        /**
+         * Bind events on pinpad command button element.
+         * @param button
+         * @private
+         */
         _bindCommandEvents: function( button ) {
             this._on( button, {
                 click: function( event ) {
                     if ( button.is( ".ui-pinpad-command-correct" ) ) {
-                        this.outputElement.focus();
                         if ( this.options.clear ) {
                             this._clear();
                         } else {
@@ -476,6 +500,17 @@
                     }
                 }
             } );
+        },
+
+        /**
+         * Formats the pinpad input value and display the result on the output element.
+         * @private
+         */
+        _displayValue: function() {
+            var value = this.element.val();
+            var options = this.options;
+            var formattedValue = this.options.formatter.format( value, options);
+            this.outputElement.val( formattedValue );
         },
 
         /**
@@ -545,6 +580,7 @@
                 this._updateCommands( this.options.commands, value );
             }
 
+            this._checkDecimalKey();
             this._checkConfirmCommand();
         },
 
@@ -600,6 +636,7 @@
             var inst = this;
             inst._hide( inst.ppDiv, inst.options.hide, function() {
                 inst._trigger( "close", event );
+                inst.outputElement.blur();
                 inst.ppDiv.detach();
             } );
         },
@@ -663,11 +700,11 @@
             this.ppDiv.empty();
             this._drawKeys();
             this._drawCommands();
-            this.ppDiv.find( "button" ).button( "refresh" );
-            this.ppDiv.find( "button" ).each( function( index, button ) {
-                $( button ).button( "option", "disabled", element.is( ":disabled" ) );
-            } );
             this._checkConfirmCommand();
+            this.ppDiv.find( "button" ).button( "refresh" );
+            if ( element.is( ":disabled" ) ) {
+                this.ppDiv.find( "button" ).button( "disable" );
+            }
         },
 
         /**
@@ -759,6 +796,22 @@
             return keyCode >= $.ui.keyCode.NUMPAD_0 && keyCode <= $.ui.keyCode.NUMPAD_9;
         }
 
+    } );
+
+    $( window ).on( "mousedown", function( event ) {
+        var target = $( event.target );
+        if ( target.is( ".ui-pinpad-output" ) ) {
+            return;
+        }
+        var input = $( event.target )
+            .closest( ".ui-pinpad" ).data( "input" );
+        if ( input ) {
+            event.preventDefault();
+        } else {
+            $( document.body ).children( ".ui-pinpad" ).each( function( index, element ) {
+                $( element ).data( "input" ).pinpad( "cancel" );
+            } );
+        }
     } );
 
     return $.ui.pinpad;
