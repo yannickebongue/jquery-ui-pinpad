@@ -5,256 +5,44 @@
     <title>jQuery UI Pinpad Widget</title>
     <link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
-    <style>
-        body{
-            font-family: "Trebuchet MS", sans-serif;
-            margin: 50px;
-        }
-
-        .demoHeaders {
-            margin-top: 2em;
-        }
-
-        .demo-description {
-            clear: both;
-            padding: 12px;
-        }
-
-        #downloadFrame button, #downloadFrame a {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="demo.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="external/jquery.js"></script>
+    <script src="external/jquery-ui.js"></script>
+    <script src="dist/jquery.ui.pinpad.js"></script>
+    <script src="demo.js"></script>
 </head>
 <body>
 
-<h1>jQuery UI Pinpad</h1>
+<header>
+    <h1>jQuery UI Pinpad</h1>
 
-<div id="downloadFrame">
-    <button type="button">Download jQuery UI Pinpad</button>
-    <a href="https://github.com/yannickebongue/jquery-ui-pinpad">View source on Github</a>
-</div>
-
-<div class="ui-widget">
-    <p>This page demonstrates the basic pinpad widget usage.</p>
-</div>
-
-
-<div id="demoContent">
-
-    <!-- Default -->
-    <h2 class="demoHeaders">Default functionality</h2>
-    <div>
-        <div class="demo-description">
-            <p>The pinpad is tied to a standard form input field. Focus on the input (click, or use the tab key) to open an interactive pin pad in a small overlay.</p>
-        </div>
-
-        <input id="default" type="text" title="Click here">
+    <div id="downloadFrame">
+        <button type="button">Download jQuery UI Pinpad</button>
+        <a href="https://github.com/yannickebongue/jquery-ui-pinpad">View source on Github</a>
     </div>
 
-
-    <!-- Autocompletion -->
-    <h2 class="demoHeaders">Autocompletion</h2>
     <div>
-        <div class="demo-description">
-            <p>Confirm the content of the pinpad input automatically when its value reach the maximum length. Set the <code>autoComplete</code> option to <code>true</code> and set one of <code>maxlength</code> attribute of the pinpad input or <code>maxLength</code> option during pinpad creation.</p>
-        </div>
-
-        <input id="autocompletion" type="text" title="Click here" maxlength="5">
+        <p>This page demonstrates the basic pinpad widget usage.</p>
     </div>
+</header>
 
-
-    <!-- Content length restriction -->
-    <h2 class="demoHeaders">Restrict content length</h2>
-    <div>
-        <div class="demo-description">
-            <p>Restrict the length of the pinpad input content using the <code>minLength</code> and <code>maxLength</code> options.</p>
+<main>
+    <aside>
+        <h2>Examples</h2>
+    </aside>
+    <article>
+        <iframe class="demo-frame"></iframe>
+        <div class="demo-description"></div>
+        <div class="view-source">
+            <a href="javascript:void(0)">view source</a>
+            <div style="display: none;">
+                <pre><code></code></pre>
+            </div>
         </div>
+    </article>
+</main>
 
-        <input id="contentLengthRestriction" type="text" title="Click here to insert your PIN">
-    </div>
-
-
-    <!-- Custom command -->
-    <h2 class="demoHeaders">Custom command</h2>
-    <div>
-        <div class="demo-description">
-            <p>Adding a custom command to the pinpad. By default the pinpad widget contains 3 commands: the cancel, the correct and the confirm command.</p>
-        </div>
-
-        <input id="customCommand" type="text" title="Click here">
-    </div>
-
-
-    <!-- Digit only -->
-    <h2 class="demoHeaders">Digit only</h2>
-    <div>
-        <div class="demo-description">
-            <p>Use the <code>digitOnly</code> option to accept or not the decimal point.</p>
-        </div>
-
-        <input id="digitOnly" type="text" title="Click here">
-    </div>
-
-
-    <!-- Display inline -->
-    <h2 class="demoHeaders">Display inline</h2>
-    <div>
-        <div class="demo-description">
-            <p>Display the pinpad embedded in the page instead of in an overlay. Set the <code>appendTo</code> option during the pinpad creation to indicate where to generate the widget.</p>
-        </div>
-
-        <input id="inline" type="password" title="Use the pinpad">
-        <div id="container"></div>
-    </div>
-
-
-    <!-- Localization -->
-    <h2 class="demoHeaders">Localize pinpad</h2>
-    <div>
-        <div class="demo-description">
-            <p>Localize the pinpad language (Default: english).</p>
-        </div>
-
-        <input id="localization" type="text" title="Click here">
-        <select id="locale">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="fr" selected>Français</option>
-            <option value="it">Italiano</option>
-        </select>
-    </div>
-
-
-</div>
-
-<div id="dialog" title="Help">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-</div>
-
-<script src="external/jquery.js"></script>
-<script src="external/jquery-ui.js"></script>
-<script src="dist/jquery.ui.pinpad.js"></script>
-<script src="i18n/jquery.ui.pinpad-es.js"></script>
-<script src="i18n/jquery.ui.pinpad-fr.js"></script>
-<script src="i18n/jquery.ui.pinpad-it.js"></script>
-<script>
-    var version = $.ui.pinpad.version;
-
-    $( "#downloadFrame" ).find( "button" ).button( { icon: "ui-icon-arrowthickstop-1-s", label: "Download jQuery UI Pinpad " + version } ).click( function () {
-        location.href = "https://github.com/yannickebongue/jquery-ui-pinpad/archive/" + version + ".zip";
-    } );
-
-
-
-    // Dialog message
-    $( "#dialog" ).dialog( {
-        autoOpen: false,
-        modal: true,
-        buttons: [
-            {
-                text: "Ok",
-                click: function() {
-                    $( "#dialog" ).dialog( "close" );
-                }
-            }
-        ]
-    } );
-
-
-
-    // Default
-    $( "#default" ).pinpad();
-
-
-
-    // Autocompletion
-    $( "#autocompletion" ).pinpad( { autoComplete: true } );
-
-
-
-    // Content length restriction
-    $( "#contentLengthRestriction" ).pinpad( {
-        minLength: 4,
-        maxLength: 6
-    } );
-
-
-
-    // Custom command
-    $( "#customCommand" ).pinpad( {
-        commands: [
-            { position: 0, name: "cancel", options: { icon: "ui-icon-close", iconPosition: "end" } },
-            { position: 1, name: "correct", options: { icon: "ui-icon-caret-1-w", iconPosition: "end" } },
-            { position: 2, name: "confirm", options: { icon: "ui-icon-radio-off", iconPosition: "end" } },
-            { position: 3, name: "help", options: { icon: "ui-icon-help", iconPosition: "end" } }
-        ],
-        display: {
-            decPoint: ".",
-            cancel: "Cancel",
-            correct: "Correct",
-            confirm: "Confirm",
-            help: "Help"
-        },
-
-        help: function() {
-            $( "#dialog" ).dialog( "open" ).one( "dialogclose", function() {
-                $( "#customCommand" ).pinpad( "output" ).focus();
-            } );
-        }
-    } );
-
-
-
-    // Digit only
-    $( "#digitOnly" ).pinpad( { digitOnly: true } );
-
-
-
-    // Inline
-    $( "#inline" ).pinpad( {
-        appendTo: "#container",
-        commands: [
-            { position: 0, name: "cancel", options: { icon: "ui-icon-close", iconPosition: "end" } },
-            { position: 1, name: "correct", options: { icon: "ui-icon-caret-1-w", iconPosition: "end" } },
-            { position: 2, name: "confirm", options: { icon: "ui-icon-check", iconPosition: "end" } },
-            { position: 3, name: "reset", options: { icon: "ui-icon-refresh", iconPosition: "end" } }
-        ],
-        digitOnly: true,
-        display: {
-            cancel: "Cancel",
-            correct: "Correct",
-            confirm: "Confirm",
-            reset: "Reset"
-        },
-        keys: $.ui.pinpad.generateRandomKeys(),
-        minLength: 5,
-        maxLength: 5,
-
-        cancel: function() {
-            $( this ).pinpad( "value", "" );
-        },
-
-        reset: function() {
-            var pinpad = $( this );
-            pinpad.pinpad( "clear" );
-            pinpad.pinpad( "option", "keys", $.ui.pinpad.generateRandomKeys() );
-            pinpad.pinpad( "refresh" );
-        }
-    });
-
-
-
-    // Localization
-    $( "#localization" ).pinpad( $.ui.pinpad.regional.fr );
-
-    $( "#locale" ).on( "change", function() {
-        $( "#localization" ).pinpad( "option", $.ui.pinpad.regional[ this.value ] );
-    } );
-
-
-
-    $("#demoContent").accordion();
-
-</script>
 </body>
 </html>

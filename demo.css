@@ -1,0 +1,87 @@
+body{
+    font-family: "Trebuchet MS", sans-serif;
+    margin: 50px;
+}
+
+main {
+    display: flex;
+}
+
+aside {
+    margin-right: 50px;
+    width: 300px;
+}
+
+aside h2 {
+    margin: 0;
+    padding: .2em;
+}
+
+aside ul {
+    margin: 0;
+    padding: 0;
+}
+
+aside li {
+    border-left: none;
+    border-right: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+aside li:not(:first-child) {
+    border-top: none;
+}
+
+aside li a {
+    display: block;
+    padding: .5em;
+    text-decoration: none;
+}
+
+article {
+    flex: 1;
+    width: 0;
+}
+
+.demo-frame {
+    border: 1px solid #dddddd;
+    height: 290px;
+    width: 100%;
+}
+
+.view-source div {
+    overflow: hidden;
+}
+
+.view-source pre {
+    counter-reset: lines;
+    overflow: auto;
+    position: relative;
+}
+
+.view-source .line-number {
+    counter-increment: lines;
+}
+
+.view-source .line-number::before {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    user-select: none;
+
+    content: counter(lines);
+    display: inline-block;
+    border-right: 1px solid;
+    margin-right: 0.5em;
+    padding-right: 0.5em;
+    text-align: right;
+    width: 2em;
+    opacity: 0.60;
+}
+
+#downloadFrame button, #downloadFrame a {
+    display: block;
+}
