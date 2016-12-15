@@ -223,9 +223,6 @@
                                 inst.cancel();
                             }
                         }
-                    },
-                    change: function() {
-                        inst._displayValue();
                     }
                 } );
                 inst._addClass( inst.ppDiv, null, "ui-front" );
@@ -584,6 +581,11 @@
             this._checkConfirmCommand();
         },
 
+        /**
+         * Update the pinpad to reflect the given disabled state.
+         * @param value the disabled state value to set.
+         * @private
+         */
         _setOptionDisabled: function( value ) {
             var element = this.element,
                 output = this.outputElement,
@@ -692,7 +694,7 @@
         },
 
         /**
-         * Render the pin pad with its actual state.
+         * Render the pinpad with its actual state.
          */
         refresh: function() {
             var element = this.element;
