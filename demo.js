@@ -1,5 +1,4 @@
 $( function() {
-    var version = $.ui.pinpad.version;
     var aside = $( "main" ).find( "aside" );
     var demos = [
         { url: "demos/default.html", title: "Default functionality", description: "<p>The pinpad is tied to a standard form input field. Focus on the input (click, or use the tab key) to open an interactive pin pad in a small overlay.</p>" },
@@ -11,8 +10,13 @@ $( function() {
         { url: "demos/localization.html", title: "Localize pinpad", description: "<p>Localize the pinpad language (Default: english).</p>" }
     ];
 
-    $( "#downloadFrame" ).find( "button" ).button( { icon: "ui-icon-arrowthickstop-1-s", label: "Download jQuery UI Pinpad " + version } ).on( "click", function () {
-        location.href = "https://github.com/yannickebongue/jquery-ui-pinpad/archive/" + version + ".zip";
+    $.getJSON( "package.json", function( data ) {
+        var name = data.name;
+        var version = data.version;
+        var fileName = name + "-" + version + ".zip";
+        $( "#downloadFrame" ).find( "button" ).button( { icon: "ui-icon-arrowthickstop-1-s", label: "Download jQuery UI Pinpad " + version } ).on( "click", function () {
+            location.href = "https://github.com/yannickebongue/jquery-ui-pinpad/releases/download/" + version + "/" + fileName;
+        } );
     } );
 
     $( ".view-source" ).find( "a" ).on( "click", function() {
