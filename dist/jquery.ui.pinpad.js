@@ -33,7 +33,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.3.0",
+        version: "1.4.0",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -497,6 +497,43 @@
                     }
                 }
             } );
+        },
+
+        /**
+         * Get the pinpad widget buttons that correspond to the given key code.
+         * @param keyCode the key code to match
+         * @returns {*|{}} a jQuery object with the set of button elements.
+         * @private
+         */
+        _findButtons: function( keyCode ) {
+            var buttons = $();
+            switch ( keyCode ) {
+                case $.ui.keyCode.BACKSPACE:
+                    if ( !this.options.clear ) {
+                        buttons = this.ppDiv.find( ".ui-pinpad-command-correct" );
+                    }
+                    break;
+                case $.ui.keyCode.DELETE:
+                    if ( this.options.clear ) {
+                        buttons = this.ppDiv.find( ".ui-pinpad-command-correct" );
+                    }
+                    break;
+                case $.ui.keyCode.ENTER:
+                    buttons = this.ppDiv.find( ".ui-pinpad-command-confirm" );
+                    break;
+                case $.ui.keyCode.ESCAPE:
+                    buttons = this.ppDiv.find( ".ui-pinpad-command-cancel" );
+                    break;
+                case $.ui.keyCode.DECIMAL_POINT:
+                    buttons = this.ppDiv.find( ".ui-pinpad-key-num-pad-dec" );
+                    break;
+                default:
+                    if ( $.ui.pinpad.isDigit( keyCode ) ) {
+                        buttons = this.ppDiv.find( ".ui-pinpad-key-num-pad-" +
+                            ( keyCode - $.ui.keyCode.NUMPAD_0 ) );
+                    }
+            }
+            return buttons;
         },
 
         /**

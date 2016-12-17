@@ -30,14 +30,29 @@ module.exports = function( grunt ) {
             }
         },
 
+        concat: {
+            extensions: {
+                files: {
+                    "dist/jquery.ui.pinpad.extension.js": [ "dist/jquery.ui.pinpad.extension.*.js" ]
+                }
+            }
+        },
+
         uglify: {
             options: {
                 banner: "/*! <%=pkg.name %> | <%= pkg.version %> | <%= grunt.template.today('yyyy-mm-dd') %> */\n"
             },
             build: {
-                files: {
-                    "dist/jquery.ui.pinpad.min.js": "dist/jquery.ui.pinpad.js"
-                }
+                files: [
+                    {
+                        expand: true,
+                        cwd: "dist/",
+                        src: [ "**/*.js" ],
+                        dest: "dist/",
+                        ext: ".min.js",
+                        extDot: "last"
+                    }
+                ]
             }
         },
 
@@ -52,9 +67,10 @@ module.exports = function( grunt ) {
 
     grunt.loadNpmTasks( "grunt-contrib-clean" );
     grunt.loadNpmTasks( "grunt-contrib-copy" );
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks( "grunt-contrib-uglify" );
     grunt.loadNpmTasks( "grunt-contrib-cssmin" );
 
-    grunt.registerTask( "default", [ "clean", "copy", "uglify", "cssmin" ] );
+    grunt.registerTask( "default", [ "clean", "copy", "concat:extensions", "uglify", "cssmin" ] );
 
 };

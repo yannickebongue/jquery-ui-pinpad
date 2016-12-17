@@ -8,7 +8,7 @@ main {
 }
 
 aside {
-    margin-right: 50px;
+    margin-left: 50px;
     width: 300px;
 }
 
@@ -41,7 +41,7 @@ aside li a {
 }
 
 article {
-    flex: 1;
+    flex-grow: 1;
     width: 0;
 }
 
@@ -57,8 +57,6 @@ article {
 
 .view-source pre {
     counter-reset: lines;
-    overflow: auto;
-    position: relative;
 }
 
 .view-source .line-number {
