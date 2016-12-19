@@ -3,6 +3,7 @@ $( function() {
     var demos = [
         { url: "demos/default.html", title: "Default functionality", description: "<p>The pinpad is tied to a standard form input field. Focus on the input (click, or use the tab key) to open an interactive pin pad in a small overlay.</p>" },
         { url: "demos/autocompletion.html", title: "Autocompletion", description: "<p>Confirm the content of the pinpad input automatically when its value reach the maximum length. Set the <code>autoComplete</code> option to <code>true</code> and set one of <code>maxlength</code> attribute of the pinpad input or <code>maxLength</code> option during pinpad creation.</p>" },
+        { url: "demos/clear-content.html", title: "Clear content", description: "<p>Use the <code>clear</code> option to specify if the correct command should clear the pinpad input content or not. By default this option is set to <code>false</code> and the correct command behaves as the backspace key.</p>" },
         { url: "demos/content-length-restriction.html", title: "Restrict content length", description: "<p>Restrict the length of the pinpad input content using the <code>minLength</code> and <code>maxLength</code> options.</p>" },
         { url: "demos/custom-command.html", title: "Custom command", description: "<p>Adding a custom command to the pinpad.</p>" },
         { url: "demos/digit-only.html", title: "Digit only", description: "<p>Use the <code>digitOnly</code> option to accept or not the decimal point.</p>" },
