@@ -184,6 +184,9 @@
             }
 
             if ( maxLength > 0 ) {
+                maxLength = inst.options.maxLength ?
+                    Math.min( inst.options.maxLength, maxLength ) :
+                    maxLength;
                 inst.options.maxLength = Math.max( inst.options.minLength, maxLength );
             }
 
