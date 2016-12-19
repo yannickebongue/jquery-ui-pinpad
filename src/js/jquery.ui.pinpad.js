@@ -475,7 +475,7 @@
                         value.indexOf( "." ) === -1 ) ) &&
                         value.length < this.options.maxLength &&
                         this._trigger( "keypress", event, { keyCode: keyCode } ) ) {
-                        this.value( value + button.val() );
+                        this._insertText( button.val() );
                     }
                 }
             } );
@@ -548,6 +548,31 @@
             var options = this.options;
             var formattedValue = this.options.formatter.format( value, options);
             this.outputElement.val( formattedValue );
+        },
+
+        /**
+         * Insert the given value of the pressed button.
+         * @param value the value to insert.
+         * @private
+         */
+        _insertText: function( value ) {
+            var currentValue = this.element.val();
+            if ( value == "\b" ) {
+                this.value( currentValue.substring( 0, currentValue.length - 1 ) );
+            } else {
+                this.value( currentValue + value );
+                this.outputElement.each( function( index, element ) {
+                    if ( element.createTextRange ) {
+                        var range = element.createTextRange();
+                        range.collapse( false );
+                        range.select();
+                    } else {
+                        element.blur();
+                        element.selectionStart = element.selectionEnd = element.value.length;
+                        element.focus();
+                    }
+                } );
+            }
         },
 
         /**
@@ -691,7 +716,7 @@
             var currentValue = this.element.val();
             var length = currentValue.length;
             if ( length > 0 ) {
-                this.value( currentValue.substring( 0, length - 1 ) );
+                this._insertText( "\b" );
             }
         },
 
