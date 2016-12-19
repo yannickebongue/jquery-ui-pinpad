@@ -33,7 +33,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.4.0",
+        version: "1.4.1",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -184,6 +184,9 @@
             }
 
             if ( maxLength > 0 ) {
+                maxLength = inst.options.maxLength ?
+                    Math.min( inst.options.maxLength, maxLength ) :
+                    maxLength;
                 inst.options.maxLength = Math.max( inst.options.minLength, maxLength );
             }
 
@@ -210,12 +213,12 @@
                     }
                 } );
                 inst._on( inst.outputElement, {
-                    focusin: function( event ) {
+                    "focusin": function( event ) {
                         if ( inst.ppDiv.is( ":hidden" ) ) {
                             inst._open( event );
                         }
                     },
-                    focusout: function( event ) {
+                    "focusout": function( event ) {
                         if ( event.relatedTarget != null ) {
                             var input = $( event.relatedTarget )
                                 .closest( ".ui-pinpad" ).data( "input" );
@@ -472,7 +475,7 @@
                         value.indexOf( "." ) === -1 ) ) &&
                         value.length < this.options.maxLength &&
                         this._trigger( "keypress", event, { keyCode: keyCode } ) ) {
-                        this.value( value + button.val() );
+                        this._insertText( button.val() );
                     }
                 }
             } );
@@ -545,6 +548,31 @@
             var options = this.options;
             var formattedValue = this.options.formatter.format( value, options);
             this.outputElement.val( formattedValue );
+        },
+
+        /**
+         * Insert the given value of the pressed button.
+         * @param value the value to insert.
+         * @private
+         */
+        _insertText: function( value ) {
+            var currentValue = this.element.val();
+            if ( value == "\b" ) {
+                this.value( currentValue.substring( 0, currentValue.length - 1 ) );
+            } else {
+                this.value( currentValue + value );
+                this.outputElement.each( function( index, element ) {
+                    if ( element.createTextRange ) {
+                        var range = element.createTextRange();
+                        range.collapse( false );
+                        range.select();
+                    } else {
+                        element.blur();
+                        element.selectionStart = element.selectionEnd = element.value.length;
+                        element.focus();
+                    }
+                } );
+            }
         },
 
         /**
@@ -688,7 +716,7 @@
             var currentValue = this.element.val();
             var length = currentValue.length;
             if ( length > 0 ) {
-                this.value( currentValue.substring( 0, length - 1 ) );
+                this._insertText( "\b" );
             }
         },
 
@@ -739,10 +767,10 @@
             this.ppDiv.empty();
             this._drawKeys();
             this._drawCommands();
-            this._checkConfirmCommand();
-            this.ppDiv.find( "button" ).button( "refresh" );
             if ( element.is( ":disabled" ) ) {
                 this.ppDiv.find( "button" ).button( "disable" );
+            } else {
+                this._checkConfirmCommand();
             }
         },
 
@@ -837,19 +865,28 @@
 
     } );
 
-    $( window ).on( "mousedown", function( event ) {
-        var target = $( event.target );
-        if ( target.is( ".ui-pinpad-output" ) ) {
-            return;
-        }
-        var input = $( event.target )
-            .closest( ".ui-pinpad" ).data( "input" );
-        if ( input ) {
-            event.preventDefault();
-        } else {
-            $( document.body ).children( ".ui-pinpad" ).each( function( index, element ) {
-                $( element ).data( "input" ).pinpad( "cancel" );
-            } );
+    $( window ).on( {
+        "mousedown": function( event ) {
+            var target = $( event.target );
+            if ( target.is( ".ui-pinpad-output" ) ) {
+                return;
+            }
+            var input = target.closest( ".ui-pinpad" ).data( "input" );
+            if ( input ) {
+                if ( target.is( "button" ) ) {
+                    target.addClass( "ui-state-active" );
+                }
+                event.preventDefault();
+            } else {
+                $( document.body ).children( ".ui-pinpad" ).each( function( index, element ) {
+                    $( element ).data( "input" ).pinpad( "cancel" );
+                } );
+            }
+        },
+
+        "mouseup": function() {
+            $( document ).find( ".ui-pinpad button.ui-state-active" )
+                .removeClass( "ui-state-active" );
         }
     } );
 
