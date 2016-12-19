@@ -210,12 +210,12 @@
                     }
                 } );
                 inst._on( inst.outputElement, {
-                    focusin: function( event ) {
+                    "focusin": function( event ) {
                         if ( inst.ppDiv.is( ":hidden" ) ) {
                             inst._open( event );
                         }
                     },
-                    focusout: function( event ) {
+                    "focusout": function( event ) {
                         if ( event.relatedTarget != null ) {
                             var input = $( event.relatedTarget )
                                 .closest( ".ui-pinpad" ).data( "input" );
@@ -739,10 +739,10 @@
             this.ppDiv.empty();
             this._drawKeys();
             this._drawCommands();
-            this._checkConfirmCommand();
-            this.ppDiv.find( "button" ).button( "refresh" );
             if ( element.is( ":disabled" ) ) {
                 this.ppDiv.find( "button" ).button( "disable" );
+            } else {
+                this._checkConfirmCommand();
             }
         },
 
@@ -837,19 +837,28 @@
 
     } );
 
-    $( window ).on( "mousedown", function( event ) {
-        var target = $( event.target );
-        if ( target.is( ".ui-pinpad-output" ) ) {
-            return;
-        }
-        var input = $( event.target )
-            .closest( ".ui-pinpad" ).data( "input" );
-        if ( input ) {
-            event.preventDefault();
-        } else {
-            $( document.body ).children( ".ui-pinpad" ).each( function( index, element ) {
-                $( element ).data( "input" ).pinpad( "cancel" );
-            } );
+    $( window ).on( {
+        "mousedown": function( event ) {
+            var target = $( event.target );
+            if ( target.is( ".ui-pinpad-output" ) ) {
+                return;
+            }
+            var input = target.closest( ".ui-pinpad" ).data( "input" );
+            if ( input ) {
+                if ( target.is( "button" ) ) {
+                    target.addClass( "ui-state-active" );
+                }
+                event.preventDefault();
+            } else {
+                $( document.body ).children( ".ui-pinpad" ).each( function( index, element ) {
+                    $( element ).data( "input" ).pinpad( "cancel" );
+                } );
+            }
+        },
+
+        "mouseup": function() {
+            $( document ).find( ".ui-pinpad button.ui-state-active" )
+                .removeClass( "ui-state-active" );
         }
     } );
 
