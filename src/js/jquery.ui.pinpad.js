@@ -417,6 +417,17 @@
             } );
 
             this._on( this.outputElement, {
+                focus: function( event ) {
+                    var element = event.target;
+                    if ( element.setSelectionRange ) {
+                        var len = element.value.length;
+                        element.setSelectionRange( len, len );
+                    } else {
+                        var $el = $( element );
+                        $el.val( $el.val() );
+                    }
+                },
+
                 keydown: function( event ) {
                     var keyCode = event.keyCode;
                     switch ( keyCode ) {
