@@ -214,9 +214,7 @@
                 } );
                 inst._on( inst.outputElement, {
                     "focusin": function( event ) {
-                        if ( inst.ppDiv.is( ":hidden" ) ) {
-                            inst._open( event );
-                        }
+                        inst.open( event );
                     },
                     "focusout": function( event ) {
                         if ( event.relatedTarget != null ) {
@@ -747,6 +745,16 @@
          */
         confirm: function() {
             this.ppDiv.find( ".ui-pinpad-command-confirm" ).click();
+        },
+
+        /**
+         * Open the pinpad widget when the given is triggered.
+         * @param event the event which cause the pinpad to be opened.
+         */
+        open: function( event ) {
+            if ( this.ppDiv.is( ":hidden" ) ) {
+                this._open( event );
+            }
         },
 
         /**
