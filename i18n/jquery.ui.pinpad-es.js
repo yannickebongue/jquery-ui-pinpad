@@ -4,7 +4,7 @@
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
-		define( [ "../widgets/pinpad" ], factory );
+		define( [ "jquery-ui-pinpad" ], factory );
 	} else {
 
 		// Browser globals
