@@ -16,6 +16,9 @@
     "name": "Yannick Ebongue",
     "email": "yannickebongue@yahoo.fr"
   },
+  "scripts": {
+    "build": "npm install && grunt"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/yannickebongue/jquery-ui-pinpad.git"
