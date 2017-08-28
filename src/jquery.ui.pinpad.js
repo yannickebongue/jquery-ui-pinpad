@@ -33,7 +33,7 @@
         /**
          * The semantic version number of the released jQuery UI Framework.
          */
-        version: "1.4.1",
+        version: "@VERSION",
 
         /**
          * The HTML element on which the pinpad widget should be bound.
@@ -214,9 +214,7 @@
                 } );
                 inst._on( inst.outputElement, {
                     "focusin": function( event ) {
-                        if ( inst.ppDiv.is( ":hidden" ) ) {
-                            inst._open( event );
-                        }
+                        inst.open( event );
                     },
                     "focusout": function( event ) {
                         if ( event.relatedTarget != null ) {
@@ -419,6 +417,17 @@
             } );
 
             this._on( this.outputElement, {
+                focus: function( event ) {
+                    var element = event.target;
+                    if ( element.setSelectionRange ) {
+                        var len = element.value.length;
+                        element.setSelectionRange( len, len );
+                    } else {
+                        var $el = $( element );
+                        $el.val( $el.val() );
+                    }
+                },
+
                 keydown: function( event ) {
                     var keyCode = event.keyCode;
                     switch ( keyCode ) {
@@ -747,6 +756,16 @@
          */
         confirm: function() {
             this.ppDiv.find( ".ui-pinpad-command-confirm" ).click();
+        },
+
+        /**
+         * Open the pinpad widget when the given is triggered.
+         * @param event the event which cause the pinpad to be opened.
+         */
+        open: function( event ) {
+            if ( this.ppDiv.is( ":hidden" ) ) {
+                this._open( event );
+            }
         },
 
         /**

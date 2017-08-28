@@ -1,0 +1,7 @@
+.idea/
+bower_components/
+i18n/
+src/
+
+
+Gruntfile.js

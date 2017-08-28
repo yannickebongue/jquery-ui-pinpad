@@ -2,7 +2,7 @@
   "name": "jquery-ui-pinpad",
   "title": "jQuery UI Pinpad",
   "description": "An interactive Pinpad widget for point of sale (POS) or encrypted pinpad (EPP) simulation",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "main": "dist/jquery.ui.pinpad.js",
   "keywords": [
     "jquery",
@@ -15,6 +15,9 @@
   "author": {
     "name": "Yannick Ebongue",
     "email": "yannickebongue@yahoo.fr"
+  },
+  "scripts": {
+    "build": "npm install && grunt"
   },
   "repository": {
     "type": "git",

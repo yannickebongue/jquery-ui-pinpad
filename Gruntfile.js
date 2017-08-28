@@ -35,6 +35,11 @@ module.exports = function( grunt ) {
                 files: {
                     "dist/jquery.ui.pinpad.extension.js": [ "dist/jquery.ui.pinpad.extension.*.js" ]
                 }
+            },
+            i18n: {
+                files: {
+                    "dist/jquery.ui.pinpad.i18n.js": [ "i18n/*.js" ]
+                }
             }
         },
 
@@ -71,6 +76,6 @@ module.exports = function( grunt ) {
     grunt.loadNpmTasks( "grunt-contrib-uglify" );
     grunt.loadNpmTasks( "grunt-contrib-cssmin" );
 
-    grunt.registerTask( "default", [ "clean", "copy", "concat:extensions", "uglify", "cssmin" ] );
+    grunt.registerTask( "default", [ "clean", "copy", "concat:*", "uglify", "cssmin" ] );
 
 };
