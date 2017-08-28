@@ -1,4 +1,5 @@
 .idea/
+bower_components/
 demos/
 i18n/
 src/
