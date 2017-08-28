@@ -8,14 +8,14 @@ Include the following Javascript and CSS:
 
 ```html
 <!-- jQuery UI theme -->
-<link rel="stylesheet" type="text/css" href="themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <!-- pinpad CSS -->
 <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
 
 <!-- external libraries -->
-<script src="external/jquery.js"></script>
-<script src="external/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <!-- pinpad widget -->
 <script src="dist/jquery.ui.pinpad.js"></script>
@@ -30,7 +30,7 @@ The jQuery UI Pinpad is tied to a standard form input field.
 Insert an input text where to apply the PIN pad feature
 
 ```html
-<input id="pinpad" type="text">
+<input id="pinpad">
 ```
 
 Create the pinpad widget for the input text
@@ -48,7 +48,7 @@ The jQuery UI Pinpad can also be displayed embedded in the page instead of an ov
 Insert an input text where to apply the PIN pad feature
 
 ```html
-<input id="pinpad" type="text">
+<input id="pinpad">
 ```
 
 Insert the div that will contain the interactive pinpad

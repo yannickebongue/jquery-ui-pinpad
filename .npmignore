@@ -1,12 +1,7 @@
 .idea/
 bower_components/
-demos/
 i18n/
 src/
 
-
-demo.css
-demo.js
-index.html
 
 Gruntfile.js
