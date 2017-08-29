@@ -17,7 +17,7 @@
     "email": "yannickebongue@yahoo.fr"
   },
   "scripts": {
-    "build": "npm install && grunt"
+    "prepublish": "grunt"
   },
   "repository": {
     "type": "git",
