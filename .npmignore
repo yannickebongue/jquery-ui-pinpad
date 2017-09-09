@@ -3,4 +3,5 @@ bower_components/
 src/
 
 
+.gitattributes
 Gruntfile.js
