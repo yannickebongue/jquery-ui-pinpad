@@ -139,6 +139,11 @@
              */
             show: true,
 
+            /**
+             * Specify the last confirmed value of the pinpad.
+             */
+            value: "",
+
             // Callbacks
             cancel: null,
             change: null,
@@ -175,8 +180,8 @@
             } );
             inst.outputElement = output;
 
+            inst.element.val( inst.options.value );
             inst.element.attr( "role", "pinpad-input" );
-            inst.element.val( inst._getDefaultValue() );
             inst._addClass( "ui-pinpad-input", "ui-helper-hidden" );
 
             if ( inst.element.is( ":disabled" ) ) {
@@ -219,7 +224,7 @@
                     "focusout": function( event ) {
                         if ( event.relatedTarget != null ) {
                             var input = $( event.relatedTarget )
-                                .closest( ".ui-pinpad" ).data( "input" );
+                                .closest( inst.ppDiv ).data( "input" );
                             if ( !( input && input.attr( "id" ) === inst.element.attr( "id" ) ) ) {
                                 inst.cancel();
                             }
@@ -505,7 +510,7 @@
                             this._backspace();
                         }
                     } else {
-                        this._trigger( button.attr( "name" ), event );
+                        this._processCommand( button, event );
                     }
                 }
             } );
@@ -566,21 +571,21 @@
          */
         _insertText: function( value ) {
             var currentValue = this.element.val();
+            this.outputElement.each( function( index, element ) {
+                if ( element.createTextRange ) {
+                    var range = element.createTextRange();
+                    range.collapse( false );
+                    range.select();
+                } else {
+                    element.blur();
+                    element.selectionStart = element.selectionEnd = element.value.length;
+                    element.focus();
+                }
+            } );
             if ( value == "\b" ) {
                 this.value( currentValue.substring( 0, currentValue.length - 1 ) );
             } else {
                 this.value( currentValue + value );
-                this.outputElement.each( function( index, element ) {
-                    if ( element.createTextRange ) {
-                        var range = element.createTextRange();
-                        range.collapse( false );
-                        range.select();
-                    } else {
-                        element.blur();
-                        element.selectionStart = element.selectionEnd = element.value.length;
-                        element.focus();
-                    }
-                } );
             }
         },
 
@@ -598,6 +603,34 @@
                     !( this.options.digitOnly && value.indexOf( "." ) > -1 ) );
             }
             return valid;
+        },
+
+        _processCommand: function( button, event ) {
+            var name = button.attr( "name" );
+            var callback = this[ "_" + name ];
+            if ( !( this._trigger( name, event ) === false ) &&
+                $.isFunction( callback ) ) {
+                callback.apply( this );
+            }
+        },
+
+        _cancel: function() {
+            this.value( this.option( "value" ) );
+        },
+
+        _confirm: function() {
+            this.option( "value", this.value() );
+        },
+
+        /**
+         * Returns an object for extending or overwriting the default pinpad options.
+         * @returns {Object} the options to use for extension.
+         * @private
+         */
+        _getCreateOptions: function() {
+            return {
+                value: this._getDefaultValue()
+            };
         },
 
         /**
@@ -649,6 +682,10 @@
                 this.ppDiv.find( ".ui-pinpad-key-num-pad-dec" )
                     .button( "option", "label", value.decPoint );
                 this._updateCommands( this.options.commands, value );
+            }
+
+            if ( key === "value" ) {
+                this._setValue( value );
             }
 
             this._checkDecimalKey();
