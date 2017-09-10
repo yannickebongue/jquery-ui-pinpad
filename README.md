@@ -1,5 +1,7 @@
 # jQuery UI Pinpad
 
+[![npm version][npm-badge]][npm] [![license][license-badge]][license]
+
 The jQuery UI Pinpad is a jQuery UI widget to simulate on a web browser screen a Point Of Sale (POS) or an Encrypted PIN Pad (EPP). The aim of this widget is to display a numeric pad with optionally a decimal point key and the three basic commands Cancel, Clear and Confirm.
 
 ## Installation
@@ -8,14 +10,14 @@ Include the following Javascript and CSS:
 
 ```html
 <!-- jQuery UI theme -->
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="external/jquery-ui/jquery-ui.css">
 
 <!-- pinpad CSS -->
 <link rel="stylesheet" type="text/css" href="dist/jquery.ui.pinpad.css">
 
 <!-- external libraries -->
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script src="external/jquery/jquery.js"></script>
+<script src="external/jquery-ui/jquery-ui.js"></script>
 
 <!-- pinpad widget -->
 <script src="dist/jquery.ui.pinpad.js"></script>
@@ -72,3 +74,9 @@ This will generate an interactive pinpad inside element specified by the `append
 Copyright (c) 2016 Yannick Ebongue
 
 Released under the MIT License (see [LICENSE.txt](LICENSE.txt))
+
+
+[npm]: https://www.npmjs.org/package/jquery-ui-pinpad
+[npm-badge]: https://img.shields.io/npm/v/jquery-ui-pinpad.svg?style=flat-square
+[license]: https://opensource.org/licenses/MIT
+[license-badge]: https://img.shields.io/github/license/yannickebongue/jquery-ui-pinpad.svg?style=flat-square
