@@ -8,7 +8,22 @@ module.exports = function( grunt ) {
 
         pkg: pkg,
 
-        clean: [ "dist/" ],
+        clean: [ "dist/", "external/" ],
+
+        bowercopy: {
+            all: {
+                options: {
+                    destPrefix: "external"
+                },
+                files: {
+                    "jquery/jquery.js": "jquery/dist/jquery.js",
+
+                    "jquery-ui/jquery-ui.js": "jquery-ui/jquery-ui.js",
+                    "jquery-ui/jquery-ui.css": "jquery-ui/themes/base/jquery-ui.css",
+                    "jquery-ui/images": "jquery-ui/themes/base/images"
+                }
+            }
+        },
 
         copy: {
             build: {
@@ -70,12 +85,13 @@ module.exports = function( grunt ) {
 
     });
 
+    grunt.loadNpmTasks( "grunt-bowercopy" );
     grunt.loadNpmTasks( "grunt-contrib-clean" );
     grunt.loadNpmTasks( "grunt-contrib-copy" );
-    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks( "grunt-contrib-concat" );
     grunt.loadNpmTasks( "grunt-contrib-uglify" );
     grunt.loadNpmTasks( "grunt-contrib-cssmin" );
 
-    grunt.registerTask( "default", [ "clean", "copy", "concat:*", "uglify", "cssmin" ] );
+    grunt.registerTask( "default", [ "clean", "bowercopy", "copy", "concat:*", "uglify", "cssmin" ] );
 
 };
