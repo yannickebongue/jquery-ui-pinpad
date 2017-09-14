@@ -4,6 +4,9 @@
   "description": "An interactive Pinpad widget for point of sale (POS) or encrypted pinpad (EPP) simulation",
   "version": "1.6.1",
   "main": "dist/jquery.ui.pinpad.js",
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "jquery",
     "jquery-plugin",
