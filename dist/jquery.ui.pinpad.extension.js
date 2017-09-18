@@ -3,7 +3,7 @@
 
         // AMD. Register as an anonymous module.
         define( [
-            "jquery"
+            "jquery-ui-pinpad"
         ], factory );
     } else {
 
