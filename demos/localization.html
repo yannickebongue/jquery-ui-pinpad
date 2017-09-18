@@ -11,9 +11,7 @@
     <script src="../external/jquery-ui/jquery-ui.js"></script>
     <script src="../dist/jquery.ui.pinpad.js"></script>
     <script src="../dist/jquery.ui.pinpad.extension.js"></script>
-    <script src="../i18n/jquery.ui.pinpad-es.js"></script>
-    <script src="../i18n/jquery.ui.pinpad-fr.js"></script>
-    <script src="../i18n/jquery.ui.pinpad-it.js"></script>
+    <script src="../dist/jquery.ui.pinpad.i18n.js"></script>
     <script>
         $( function () {
             $( "#pinpad" ).pinpad( $.ui.pinpad.regional.fr );
@@ -25,8 +23,12 @@
 </head>
 <body>
 
+<div class="demo-description">
+    <p>Localize the pinpad language (Default: english).</p>
+</div>
+
 <input id="pinpad" title="Click here">
-<select id="locale">
+<select id="locale" title="Select a language">
     <option value="en">English</option>
     <option value="es">Español</option>
     <option value="fr" selected>Français</option>
